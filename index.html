@@ -668,6 +668,235 @@
         gap: 24px;
       }
     }
+
+    /* ── ENHANCED ANIMATIONS ── */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes pulse-ring {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.18); }
+      50% { box-shadow: 0 0 0 8px rgba(201, 168, 76, 0); }
+    }
+
+    @keyframes shimmer-sweep {
+      0% { transform: translateX(-200%); opacity: 0; }
+      30% { opacity: 1; }
+      70% { opacity: 1; }
+      100% { transform: translateX(200%); opacity: 0; }
+    }
+
+    @keyframes bg-drift {
+      0%, 100% { opacity: 1; transform: scale(1) translate(0, 0); }
+      33% { opacity: 0.85; transform: scale(1.05) translate(2%, 1%); }
+      66% { opacity: 0.9; transform: scale(0.97) translate(-1%, 2%); }
+    }
+
+    @keyframes spin-slow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes scale-in {
+      from { opacity: 0; transform: scale(0.88); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* Animate background blob */
+    body::before {
+      animation: bg-drift 16s ease-in-out infinite;
+    }
+
+    /* Hero tag pulse */
+    .hero-tag {
+      animation: fadeUp 0.6s ease both, pulse-ring 3.5s 1.2s ease-in-out infinite !important;
+    }
+
+    /* Rotating dashed ring behind hero photo */
+    .hero-photo-wrap::after {
+      content: '';
+      position: absolute;
+      inset: -20px;
+      border: 1px dashed rgba(201, 168, 76, 0.18);
+      border-radius: 8px;
+      animation: spin-slow 28s linear infinite;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Smooth scale on hero photo hover */
+    .hero-photo {
+      transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .hero-photo-wrap:hover .hero-photo {
+      transform: scale(1.04);
+    }
+
+    /* Shimmer sweep on dividers */
+    .divider {
+      position: relative;
+      overflow: hidden;
+    }
+    .divider::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 40%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(201, 168, 76, 0.6), transparent);
+      animation: shimmer-sweep 3s 0.5s ease-in-out infinite;
+    }
+
+    /* Skill icon float on card hover */
+    .skill-card:hover .skill-icon {
+      display: inline-block;
+      animation: float 1.2s ease-in-out infinite;
+    }
+
+    /* Project number glow on hover */
+    .project-card:hover .project-num {
+      color: rgba(201, 168, 76, 0.55);
+      text-shadow: 0 0 28px rgba(201, 168, 76, 0.3);
+      transition: all 0.4s ease;
+    }
+
+    /* Staggered delays for skill cards */
+    .skills-grid .skill-card:nth-child(1) { transition-delay: 0ms; }
+    .skills-grid .skill-card:nth-child(2) { transition-delay: 70ms; }
+    .skills-grid .skill-card:nth-child(3) { transition-delay: 140ms; }
+    .skills-grid .skill-card:nth-child(4) { transition-delay: 210ms; }
+    .skills-grid .skill-card:nth-child(5) { transition-delay: 280ms; }
+    .skills-grid .skill-card:nth-child(6) { transition-delay: 350ms; }
+    .skills-grid .skill-card:nth-child(7) { transition-delay: 420ms; }
+
+    /* Staggered delays for project cards */
+    .projects-grid .project-card:nth-child(1) { transition-delay: 0ms; }
+    .projects-grid .project-card:nth-child(2) { transition-delay: 70ms; }
+    .projects-grid .project-card:nth-child(3) { transition-delay: 140ms; }
+    .projects-grid .project-card:nth-child(4) { transition-delay: 210ms; }
+    .projects-grid .project-card:nth-child(5) { transition-delay: 280ms; }
+    .projects-grid .project-card:nth-child(6) { transition-delay: 350ms; }
+    .projects-grid .project-card:nth-child(7) { transition-delay: 420ms; }
+
+    /* Active nav link */
+    .nav-links a.nav-active {
+      color: var(--gold);
+    }
+
+    /* Stat counter animation */
+    .stat-num {
+      transition: color 0.3s ease;
+    }
+    .stat:hover .stat-num {
+      color: var(--gold2);
+      text-shadow: 0 0 20px rgba(201, 168, 76, 0.35);
+    }
+
+    /* Exp card slide-in */
+    .exp-card.fade-up-element {
+      transition-property: opacity, transform;
+    }
+
+    /* ── STORE BADGES ── */
+    .project-stores {
+      margin-top: auto;
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .store-section {
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 8px;
+      padding: 12px 14px;
+      transition: border-color 0.25s ease, background 0.25s ease;
+    }
+
+    .store-section:hover {
+      border-color: rgba(201, 168, 76, 0.25);
+      background: rgba(201, 168, 76, 0.03);
+    }
+
+    .store-header {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 10px;
+    }
+
+    .store-header-icon {
+      font-size: 14px;
+      line-height: 1;
+    }
+
+    .store-header-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .store-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px 0;
+    }
+
+    .store-row + .store-row {
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .store-app-label {
+      font-size: 12px;
+      color: rgba(240, 244, 255, 0.8);
+    }
+
+    .store-btn {
+      font-size: 10px;
+      color: var(--gold);
+      text-decoration: none;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 4px 10px;
+      transition: all 0.2s ease;
+    }
+
+    .store-btn:hover {
+      border-color: var(--gold);
+      background: rgba(201, 168, 76, 0.12);
+      color: var(--gold2);
+      transform: translateY(-1px);
+    }
+
+    /* Simple play-only link badge */
+    .play-only-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--gold);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 8px 14px;
+      margin-top: auto;
+      transition: all 0.2s ease;
+    }
+
+    .play-only-link:hover {
+      border-color: var(--gold);
+      background: rgba(201, 168, 76, 0.08);
+      transform: translateY(-2px);
+    }
   </style>
 </head>
 
@@ -765,12 +994,6 @@
             data-ru="Реализовал WebRTC видеозвонки, аудиозвонки и YouTube-трансляции через LiveKit SDK с simulcast и adaptive stream.">
             Implemented WebRTC-based video calls, audio calls, and YouTube live streaming using LiveKit SDK with
             simulcast and adaptive stream.</li>
-          <li
-            data-uz="1080p/60fps broadcast konfiguratsiyasi, simulcast qatlamlari va 1:1 qo'ng'iroq uchun alohida sozlamalar."
-            data-en="Configured broadcaster at 1080p/60fps with simulcast layers and dedicated 1:1 call settings at 720p for optimal performance."
-            data-ru="Настроил вещание 1080p/60fps с simulcast-слоями и отдельную конфигурацию для звонков 1:1 при 720p.">
-            Configured broadcaster at 1080p/60fps with simulcast layers and dedicated 1:1 call settings at 720p for
-            optimal performance.</li>
           <li data-uz="Payme to'lov tizimi integratsiyasi, buyurtma va to'lov holatlari arxitekturasi."
             data-en="Integrated Payme payment  with clean order/payment status architecture and WebView-based card registration."
             data-ru="Интегрировал платёжный шлюз Payme с архитектурой статусов заказа/оплаты и WebView для регистрации карт.">
@@ -973,19 +1196,35 @@
           Telemedicine platform with separate doctor &amp; patient Flutter apps. Features WebRTC video/audio calls,
           YouTube live streaming, Payme payment gateway, and FCM push notifications.</div>
         
-        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: auto; border-top: 1px solid var(--border); padding-top: 16px;">
-          <div style="display: flex; flex-direction: column; gap: 8px;">
-            <div style="font-size: 13px; color: var(--gold2); font-weight: 500;" data-uz="Doctor Ali (Bemor)" data-en="Doctor Ali (Patient)" data-ru="Doctor Ali (Пациент)">Doctor Ali (Patient)</div>
-            <div style="display: flex; gap: 16px;">
-              <a href="https://play.google.com/store/apps/details?id=com.mehrigiyo.doctor_ali" target="_blank" class="project-link">Play Market</a>
-              <a href="https://apps.apple.com/uz/app/doctor-ali/id6469584476" target="_blank" class="project-link">App Store</a>
+        <div class="project-stores">
+          <!-- App Store section -->
+          <div class="store-section">
+            <div class="store-header">
+              <span class="store-header-icon">🍎</span>
+              <span class="store-header-label" data-uz="App Store" data-en="App Store" data-ru="App Store">App Store</span>
+            </div>
+            <div class="store-row">
+              <span class="store-app-label" data-uz="Doctor Ali (Bemor)" data-en="Doctor Ali (Patient)" data-ru="Doctor Ali (Пациент)">Doctor Ali (Patient)</span>
+              <a href="https://apps.apple.com/uz/app/doctor-ali/id6469584476" target="_blank" class="store-btn" data-uz="Ochish ↗" data-en="Open ↗" data-ru="Открыть ↗">Open ↗</a>
+            </div>
+            <div class="store-row">
+              <span class="store-app-label" data-uz="Doctor Ali Pro (Shifokor)" data-en="Doctor Ali Pro (Doctor)" data-ru="Doctor Ali Pro (Врач)">Doctor Ali Pro (Doctor)</span>
+              <a href="https://apps.apple.com/uz/app/doctor-ali-pro/id6761620686" target="_blank" class="store-btn" data-uz="Ochish ↗" data-en="Open ↗" data-ru="Открыть ↗">Open ↗</a>
             </div>
           </div>
-          <div style="display: flex; flex-direction: column; gap: 8px;">
-            <div style="font-size: 13px; color: var(--gold2); font-weight: 500;" data-uz="Doctor Ali Pro (Shifokor)" data-en="Doctor Ali Pro (Doctor)" data-ru="Doctor Ali Pro (Врач)">Doctor Ali Pro (Doctor)</div>
-            <div style="display: flex; gap: 16px;">
-              <a href="https://play.google.com/store/apps/details?id=com.mehrigiyo.doctor" target="_blank" class="project-link">Play Market</a>
-              <a href="https://apps.apple.com/uz/app/doctor-ali-pro/id6761620686" target="_blank" class="project-link">App Store</a>
+          <!-- Play Market section -->
+          <div class="store-section">
+            <div class="store-header">
+              <span class="store-header-icon">▶</span>
+              <span class="store-header-label" data-uz="Play Market" data-en="Play Market" data-ru="Play Market">Play Market</span>
+            </div>
+            <div class="store-row">
+              <span class="store-app-label" data-uz="Doctor Ali (Bemor)" data-en="Doctor Ali (Patient)" data-ru="Doctor Ali (Пациент)">Doctor Ali (Patient)</span>
+              <a href="https://play.google.com/store/apps/details?id=com.mehrigiyo.doctor_ali" target="_blank" class="store-btn" data-uz="Ochish ↗" data-en="Open ↗" data-ru="Открыть ↗">Open ↗</a>
+            </div>
+            <div class="store-row">
+              <span class="store-app-label" data-uz="Doctor Ali Pro (Shifokor)" data-en="Doctor Ali Pro (Doctor)" data-ru="Doctor Ali Pro (Врач)">Doctor Ali Pro (Doctor)</span>
+              <a href="https://play.google.com/store/apps/details?id=com.mehrigiyo.doctor" target="_blank" class="store-btn" data-uz="Ochish ↗" data-en="Open ↗" data-ru="Открыть ↗">Open ↗</a>
             </div>
           </div>
         </div>
@@ -1256,6 +1495,47 @@
       el.classList.add('fade-up-element');
       observer.observe(el);
     });
+
+    // Counter animation for hero stats
+    function animateCounter(el, target, suffix, duration) {
+      const step = target / (duration / 16);
+      let val = 0;
+      const timer = setInterval(() => {
+        val = Math.min(val + step, target);
+        el.textContent = Math.floor(val) + suffix;
+        if (val >= target) clearInterval(timer);
+      }, 16);
+    }
+
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const numEl = entry.target.querySelector('.stat-num');
+        if (!numEl) return;
+        const raw = numEl.textContent.trim();
+        const match = raw.match(/^(\d+)(.*)$/);
+        if (match) animateCounter(numEl, parseInt(match[1]), match[2], 1400);
+        counterObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.6 });
+
+    document.querySelectorAll('.stat').forEach(el => counterObserver.observe(el));
+
+    // Active nav link highlighting on scroll
+    const allSections = document.querySelectorAll('section[id]');
+    const allNavLinks = document.querySelectorAll('.nav-links a');
+
+    const navObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const id = entry.target.getAttribute('id');
+        allNavLinks.forEach(link => {
+          link.classList.toggle('nav-active', link.getAttribute('href') === '#' + id);
+        });
+      });
+    }, { rootMargin: '-45% 0px -45% 0px' });
+
+    allSections.forEach(s => navObserver.observe(s));
   </script>
 
 </body>
